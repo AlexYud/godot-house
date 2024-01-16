@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://jysvrmbsf3eq"]
+[gd_scene load_steps=32 format=3 uid="uid://jysvrmbsf3eq"]
 
 [ext_resource type="PackedScene" uid="uid://darlenwa1g2a7" path="res://scenes/player.tscn" id="1_6bo5h"]
 [ext_resource type="PackedScene" uid="uid://cxsr8hwsijrb1" path="res://assets/models/kitchen/fridge/fridge.tscn" id="1_vkry5"]
@@ -9,32 +9,40 @@
 [ext_resource type="PackedScene" uid="uid://qysvhs0fcy4s" path="res://assets/models/kitchen/fry_pan/fry_pan.tscn" id="6_m5f42"]
 [ext_resource type="PackedScene" uid="uid://djxshmpqjdvrd" path="res://assets/models/kitchen/sauce_pan/sauce_pan.tscn" id="7_yicn2"]
 [ext_resource type="PackedScene" uid="uid://3ps7psvc6kfe" path="res://assets/models/kitchen/air_fryer/air_fryer.tscn" id="8_e5pdf"]
-[ext_resource type="PackedScene" uid="uid://cqesordifu3ax" path="res://assets/models/kitchen/ceiling_lamp/ceiling_lamp.tscn" id="9_flrdv"]
+[ext_resource type="PackedScene" uid="uid://cqesordifu3ax" path="res://assets/models/common/ceiling_lamp/ceiling_lamp.tscn" id="9_flrdv"]
 [ext_resource type="PackedScene" uid="uid://b46nf5gug7ooi" path="res://assets/models/kitchen/blender/blender.tscn" id="10_sgjjs"]
 [ext_resource type="PackedScene" uid="uid://jg4sa1j1hb4t" path="res://assets/models/kitchen/glass_cup/glass_cup.tscn" id="11_wyo52"]
 [ext_resource type="PackedScene" uid="uid://ccuwlxbwcgqwf" path="res://assets/models/kitchen/plate/plate.tscn" id="12_45254"]
 [ext_resource type="PackedScene" uid="uid://ca0ttlt4pn6e2" path="res://assets/models/kitchen/fork/fork.tscn" id="13_20vwy"]
 [ext_resource type="PackedScene" uid="uid://l6iiwaq4oau7" path="res://assets/models/living_room/wood_table/wood_table.tscn" id="14_1pqtd"]
 [ext_resource type="PackedScene" uid="uid://clt683a515py7" path="res://assets/models/kitchen/double_door_upper_cabin/double_door_upper_cabin.tscn" id="14_hx3va"]
+[ext_resource type="PackedScene" uid="uid://ydw4wna4aipi" path="res://assets/models/common/door/door.tscn" id="15_6fd37"]
 [ext_resource type="PackedScene" uid="uid://cisuuxokovyjg" path="res://assets/models/living_room/couch/couch.tscn" id="15_cvcm8"]
+[ext_resource type="PackedScene" uid="uid://cy0eq2ib6c65m" path="res://assets/models/bedroom/drawers_base_cabinet/drawers_base_cabinet.tscn" id="16_7st5a"]
+[ext_resource type="PackedScene" uid="uid://ba2tid1q2xwip" path="res://assets/models/living_room/tv/tv.tscn" id="17_0hgg3"]
+[ext_resource type="PackedScene" uid="uid://bonnp5mlv2aad" path="res://assets/models/bedroom/bed/bed.tscn" id="17_5vqoy"]
+[ext_resource type="PackedScene" uid="uid://cloyjr5gb6lki" path="res://assets/models/bedroom/coffee_cup/coffee_cup.tscn" id="18_egb4a"]
+[ext_resource type="PackedScene" uid="uid://d03hh6cq8lhub" path="res://assets/models/living_room/chair/chair.tscn" id="18_m6r0x"]
+[ext_resource type="PackedScene" uid="uid://bi5c2l58qdbia" path="res://assets/models/bedroom/table_lamp/table_lamp.tscn" id="19_mdit8"]
+[ext_resource type="PackedScene" uid="uid://dkngehv3gtj6h" path="res://assets/models/living_room/rounded_table/rounded_table.tscn" id="19_v20vd"]
+[ext_resource type="PackedScene" uid="uid://clwx48v2y555j" path="res://assets/models/living_room/dinner_table/dinner_table.tscn" id="20_k847s"]
+[ext_resource type="PackedScene" uid="uid://37c8sunjcvia" path="res://assets/models/living_room/floor_lamp/floor_lamp.tscn" id="22_pe0x3"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6o7yk"]
-sky_top_color = Color(0.137255, 0.172549, 0.219608, 1)
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6ciya"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.227451, 0.235294, 0.619608, 1)
 
-[sub_resource type="Sky" id="Sky_n23bx"]
-sky_material = SubResource("ProceduralSkyMaterial_6o7yk")
+[sub_resource type="Sky" id="Sky_xl21c"]
+sky_material = SubResource("ProceduralSkyMaterial_6ciya")
 
 [sub_resource type="Environment" id="Environment_nvpdp"]
 background_mode = 2
-sky = SubResource("Sky_n23bx")
+sky = SubResource("Sky_xl21c")
 tonemap_mode = 2
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 glow_enabled = true
-fog_enabled = true
 fog_light_color = Color(1, 1, 1, 1)
 fog_density = 0.001
 
@@ -62,20 +70,20 @@ use_collision = true
 size = Vector3(15, 1, 15)
 
 [node name="ceiling" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000617862, 3.49975, 5.79357e-05)
 material_override = SubResource("StandardMaterial3D_ijc0t")
 use_collision = true
 size = Vector3(15, 1, 15)
 
 [node name="wall" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21928, 1.5, 7.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19013, 1.5, 7.2)
 use_collision = true
-size = Vector3(6.56145, 3, 0.5)
+size = Vector3(6.61974, 3, 0.5)
 
 [node name="wall2" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12559, 1.5, 7.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.87039, 1.5, 7.2)
 use_collision = true
-size = Vector3(6.74883, 3, 0.5)
+size = Vector3(7.25923, 3, 0.5)
 
 [node name="wall4" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 1.5, -7.2)
@@ -103,9 +111,9 @@ use_collision = true
 size = Vector3(1.2, 3, 0.25)
 
 [node name="wall8" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(-1.35, 0, -8.74228e-08, 0, 1, 0, 1.18021e-07, 0, -1, 4.49339, 1.5, 2.6202)
+transform = Transform3D(-1.35, 0, -8.74228e-08, 0, 1, 0, 1.18021e-07, 0, -1, 4.40309, 1.5, 2.6202)
 use_collision = true
-size = Vector3(3.73659, 3, 0.25)
+size = Vector3(3.87037, 3, 0.25)
 
 [node name="wall9" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 1.16529, 1.5, 6.32638)
@@ -128,29 +136,44 @@ use_collision = true
 size = Vector3(1.57595, 3, 0.25)
 
 [node name="wall13" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 2.96087)
+transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 3.05402)
 use_collision = true
-size = Vector3(0.322636, 3, 0.25)
+size = Vector3(0.460634, 3, 0.25)
 
 [node name="wall14" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 5.86865)
+transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 5.74655)
 use_collision = true
-size = Vector3(1.63236, 3, 0.25)
+size = Vector3(1.81325, 3, 0.25)
 
 [node name="wall15" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 0.26529, 1.5, -2.15244)
+transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 0.26529, 1.5, -2.11415)
 use_collision = true
-size = Vector3(7.1451, 3, 0.25)
+size = Vector3(7.20183, 3, 0.25)
 
 [node name="wall16" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(1.35, 0, 1.42109e-14, 0, 1, 0, -3.19744e-14, 0, 1, 0.520231, 1.5, 2.55283)
+transform = Transform3D(1.35, 0, 1.42109e-14, 0, 1, 0, -3.19744e-14, 0, 1, 0.519051, 1.5, 2.62058)
 use_collision = true
-size = Vector3(0.194284, 3, 0.238159)
+size = Vector3(0.196032, 3, 0.253006)
 
 [node name="wall17" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, -0.567726, 1.5, -6.23705)
 use_collision = true
 size = Vector3(1.07086, 3, 1.39819)
+
+[node name="wall18" type="CSGBox3D" parent="house/struct"]
+transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, -0.304903, 2.8674, 7.19782)
+use_collision = true
+size = Vector3(0.363838, 0.265198, 1.15228)
+
+[node name="wall19" type="CSGBox3D" parent="house/struct"]
+transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 1.22005, 2.8674, 2.62058)
+use_collision = true
+size = Vector3(0.18522, 0.265198, 1.14059)
+
+[node name="wall20" type="CSGBox3D" parent="house/struct"]
+transform = Transform3D(-1.35, 0, -8.74228e-08, 0, 1, 0, 1.18021e-07, 0, -1, 2.86506, 2.8674, 3.94516)
+use_collision = true
+size = Vector3(0.18522, 0.265198, 1.15935)
 
 [node name="furniture" type="Node3D" parent="house"]
 
@@ -276,6 +299,9 @@ transform = Transform3D(-1.3, 0, -1.96295e-07, 0, 1.3, 0, 1.96295e-07, 0, -1.3, 
 [node name="double_door_upper_cabin4" parent="house/furniture/kitchen" instance=ExtResource("14_hx3va")]
 transform = Transform3D(1.3, 0, 8.26449e-08, 0, 1.3, 0, -8.26449e-08, 0, 1.3, -6.2966, 2.5, 2.90472)
 
+[node name="door" parent="house/furniture/kitchen" instance=ExtResource("15_6fd37")]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0.234125, 0, 7.00381)
+
 [node name="bathroom" type="Node3D" parent="house/furniture"]
 
 [node name="ceiling_lamp" parent="house/furniture/bathroom" instance=ExtResource("9_flrdv")]
@@ -292,22 +318,67 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0939, 2.9, -0.834816)
 [node name="ceiling_lamp3" parent="house/furniture/bedroom" instance=ExtResource("9_flrdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58285, 2.9, -0.834816)
 
+[node name="drawers_base_cabinet" parent="house/furniture/bedroom" instance=ExtResource("16_7st5a")]
+transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, 6.53146, 0.422435, -5.20509)
+
+[node name="drawers_base_cabinet2" parent="house/furniture/bedroom" instance=ExtResource("16_7st5a")]
+transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, 6.53146, 0.422435, -2.4106)
+
+[node name="bed" parent="house/furniture/bedroom" instance=ExtResource("17_5vqoy")]
+transform = Transform3D(-4.80825e-08, 0, -1.1, 0, 1.1, 0, 1.1, 0, -4.80825e-08, 5.25451, 0.746117, -3.3276)
+
+[node name="coffee_cup" parent="house/furniture/bedroom" instance=ExtResource("18_egb4a")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6.44239, 1.09577, -2.63465)
+
+[node name="table_lamp" parent="house/furniture/bedroom" instance=ExtResource("19_mdit8")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 6.54494, 1.36238, -5.23128)
+
 [node name="living_room" type="Node3D" parent="house/furniture"]
 
 [node name="ceiling_lamp" parent="house/furniture/living_room" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66034, 2.9, -4.91178)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66034, 2.9, -3.96423)
 
 [node name="ceiling_lamp2" parent="house/furniture/living_room" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.822, 2.9, -0.745)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6585, 2.9, -0.244974)
 
 [node name="ceiling_lamp3" parent="house/furniture/living_room" instance=ExtResource("9_flrdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 2.9, 3.687)
 
 [node name="wood_table" parent="house/furniture/living_room" instance=ExtResource("14_1pqtd")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.27854, 0.352371, -3.92254)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.89288, 0.352371, -3.40413)
 
 [node name="couch" parent="house/furniture/living_room" instance=ExtResource("15_cvcm8")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.497232, 0.440464, -3.38416)
+transform = Transform3D(0.0298886, 0, -1.09959, 0, 1.1, 0, 1.09959, 0, 0.0298886, -0.497232, 0.526179, -3.36697)
+
+[node name="couch2" parent="house/furniture/living_room" instance=ExtResource("15_cvcm8")]
+transform = Transform3D(1.09998, 0, 0.00604753, 0, 1.1, 0, -0.00604753, 0, 1.09998, -2.94312, 0.526179, -6.1017)
+
+[node name="tv" parent="house/furniture/living_room" instance=ExtResource("17_0hgg3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.63313, 0.920402, -3.30918)
+
+[node name="chair" parent="house/furniture/living_room" instance=ExtResource("18_m6r0x")]
+transform = Transform3D(-0.111512, 0, 1.19481, 0, 1.2, 0, -1.19481, 0, -0.111512, -5.53232, 0.791998, 0.924758)
+
+[node name="chair2" parent="house/furniture/living_room" instance=ExtResource("18_m6r0x")]
+transform = Transform3D(1.19965, 0, -0.0291091, 0, 1.2, 0, 0.0291091, 0, 1.19965, -4.32575, 0.791998, -0.325776)
+
+[node name="chair3" parent="house/furniture/living_room" instance=ExtResource("18_m6r0x")]
+transform = Transform3D(-1.00873, 0, -0.64998, 0, 1.2, 0, 0.64998, 0, -1.00873, -2.89405, 0.791998, 1.43557)
+
+[node name="rounded_table" parent="house/furniture/living_room" instance=ExtResource("19_v20vd")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -3.1033, 0.383242, -3.15181)
+
+[node name="dinner_table" parent="house/furniture/living_room" instance=ExtResource("20_k847s")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -4.3, 0.0593286, 0.8)
+
+[node name="door2" parent="house/furniture/living_room" instance=ExtResource("15_6fd37")]
+transform = Transform3D(0.104483, 0, -0.641548, 0, 0.65, 0, 0.641548, 0, 0.104483, 0.651037, 0, 2.63616)
+
+[node name="door3" parent="house/furniture/living_room" instance=ExtResource("15_6fd37")]
+transform = Transform3D(-0.5809, 0, -0.291642, 0, 0.65, 0, 0.291642, 0, -0.5809, 2.86827, 0, 3.37702)
+
+[node name="floor_lamp" parent="house/furniture/living_room" instance=ExtResource("22_pe0x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.265659, 1.709, -0.819965)
 
 [node name="Player" parent="." instance=ExtResource("1_6bo5h")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 6)

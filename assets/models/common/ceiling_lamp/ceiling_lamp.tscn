@@ -80,9 +80,15 @@ mesh = SubResource("ArrayMesh_ugtup")
 skeleton = NodePath("")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="RootNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.185836, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.138482, 0)
 light_color = Color(1, 0.952941, 0.94902, 1)
-light_energy = 3.0
+light_energy = 5.0
+omni_range = 0.2
+
+[node name="SpotLight3D" type="SpotLight3D" parent="RootNode"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.162207, -0.00227946)
+spot_range = 5.5
+spot_angle = 120.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00305176, 0.0136719, -6.10352e-05)

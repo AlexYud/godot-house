@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbdxp3xaxngba"
-path="res://.godot/imported/Ceiling Lamp-76VCPcN5C8.glb-8e43b26ca831f5be5d1e650650d9cb6e.scn"
+uid="uid://0jxstsdv0vd0"
+path="res://.godot/imported/Table Round Small.glb-bc0424a02987ea5ae4e3d165fcfda8ec.scn"
 
 [deps]
 
-source_file="res://assets/models/kitchen/ceiling_lamp/Ceiling Lamp-76VCPcN5C8.glb"
-dest_files=["res://.godot/imported/Ceiling Lamp-76VCPcN5C8.glb-8e43b26ca831f5be5d1e650650d9cb6e.scn"]
+source_file="res://assets/models/living_room/dinner_table/Table Round Small.glb"
+dest_files=["res://.godot/imported/Table Round Small.glb-bc0424a02987ea5ae4e3d165fcfda8ec.scn"]
 
 [params]
 
