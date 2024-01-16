@@ -5,9 +5,9 @@ extends CharacterBody3D
 @onready var animation_player = $"visuals/Root Scene/AnimationPlayer"
 @onready var visuals = $visuals
 
-const WALK_SPEED = 2.5
-const SPRINT_SPEED = 5.0
-const JUMP_VELOCITY = 4.8
+const WALK_SPEED = 2.25
+const SPRINT_SPEED = 4.5
+#const JUMP_VELOCITY = 4.8
 const SENSITIVITY = 0.002
 
 var speed
@@ -33,7 +33,7 @@ func _input(event):
 		rotate_y(-event.relative.x * SENSITIVITY)
 		camera_mount.rotate_x(-event.relative.y * SENSITIVITY)
 		camera_mount.rotation.x = clamp(camera_mount.rotation.x, deg_to_rad(-40), deg_to_rad(60))
-
+		
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -52,35 +52,37 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
-		if is_running:
-			if input_dir.y < 0 && animation_player.current_animation != "CharacterArmature|Run":
-				animation_player.play("CharacterArmature|Run")
-			if input_dir.y > 0 && animation_player.current_animation != "CharacterArmature|Run_Back":
-				animation_player.play("CharacterArmature|Run_Back") 
-			if input_dir.x > 0 && animation_player.current_animation != "CharacterArmature|Run_Right":
-				animation_player.play("CharacterArmature|Run_Right")
-			if input_dir.x < 0 && animation_player.current_animation != "CharacterArmature|Run_Left":
-				animation_player.play("CharacterArmature|Run_Left")
-		else: 
-			if animation_player.current_animation != "CharacterArmature|Walk":
-				animation_player.play("CharacterArmature|Walk")
-	
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		if is_on_wall() && animation_player.current_animation != "CharacterArmature|Idle":
+			animation_player.play("CharacterArmature|Idle")
+		else :
+			# Head bob
+			t_bob += delta * velocity.length() * float(is_on_floor())
+			camera_3d.transform.origin = _headbob(t_bob)
+			
+			# FOV
+			var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+			var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
+			camera_3d.fov = lerp(camera_3d.fov, target_fov, delta * 8.0)
+			if is_running:
+				if input_dir.y < 0 && animation_player.current_animation != "CharacterArmature|Run":
+					animation_player.play("CharacterArmature|Run")
+				if input_dir.y > 0 && animation_player.current_animation != "CharacterArmature|Run_Back":
+					animation_player.play("CharacterArmature|Run_Back") 
+				if input_dir.x > 0 && animation_player.current_animation != "CharacterArmature|Run_Right":
+					animation_player.play("CharacterArmature|Run_Right")
+				if input_dir.x < 0 && animation_player.current_animation != "CharacterArmature|Run_Left":
+					animation_player.play("CharacterArmature|Run_Left")
+			else: 
+				if animation_player.current_animation != "CharacterArmature|Walk":
+					animation_player.play("CharacterArmature|Walk")
+		
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
 	else:
 		if animation_player.current_animation != "CharacterArmature|Idle":
 			animation_player.play("CharacterArmature|Idle")
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
-	
-	# Head bob
-	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera_3d.transform.origin = _headbob(t_bob)
-	
-	# FOV
-	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
-	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
-	camera_3d.fov = lerp(camera_3d.fov, target_fov, delta * 8.0)
 	
 	move_and_slide()
 
