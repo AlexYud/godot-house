@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://crad2awvmc12c"]
+
+[ext_resource type="Script" path="res://scripts/player2.gd" id="1_8qwge"]
+[ext_resource type="Texture2D" uid="uid://bom8x0ydeb6jr" path="res://assets/textures/cookie_light.jpg" id="2_ck06t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmcb2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tm2b5"]
+
+[node name="Player2" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02188, 0)
+script = ExtResource("1_8qwge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vmcb2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_tm2b5")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26693, -0.013838)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972921, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.282927, 0, 0)
+light_energy = 2.0
+light_volumetric_fog_energy = 16.0
+light_projector = ExtResource("2_ck06t")
+shadow_enabled = true
+spot_range = 20.0
+spot_angle = 20.0
