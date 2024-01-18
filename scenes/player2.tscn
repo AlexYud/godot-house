@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://crad2awvmc12c"]
+[gd_scene load_steps=6 format=3 uid="uid://crad2awvmc12c"]
 
 [ext_resource type="Script" path="res://scripts/player2.gd" id="1_8qwge"]
+[ext_resource type="Script" path="res://scripts/interactRay.gd" id="2_4v8r5"]
 [ext_resource type="Texture2D" uid="uid://bom8x0ydeb6jr" path="res://assets/textures/cookie_light.jpg" id="2_ck06t"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmcb2"]
@@ -24,14 +25,83 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26693, -0.013838)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
+[node name="InteractRay" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, -1, -1.5)
+script = ExtResource("2_4v8r5")
+
+[node name="Prompt" type="Label" parent="Head/InteractRay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -24.5
+offset_right = 33.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "Message
+[Key]"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Head/InteractRay"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -98.0
+offset_right = 30.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Subtitle"
+
 [node name="Hand" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972921, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.282927, 0, 0)
-light_energy = 2.0
+light_energy = 3.0
+light_indirect_energy = 0.0
 light_volumetric_fog_energy = 16.0
 light_projector = ExtResource("2_ck06t")
 shadow_enabled = true
 spot_range = 20.0
 spot_angle = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1420.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+autowrap_mode = 2
+
+[connection signal="visibility_changed" from="CanvasLayer" to="." method="_on_canvas_layer_visibility_changed"]
