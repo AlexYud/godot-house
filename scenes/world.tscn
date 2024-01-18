@@ -1,6 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://jysvrmbsf3eq"]
+[gd_scene load_steps=36 format=3 uid="uid://jysvrmbsf3eq"]
 
+[ext_resource type="Texture2D" uid="uid://clfoiahnjin27" path="res://assets/textures/Dark Wood Floor.jpeg" id="1_i5hyv"]
 [ext_resource type="PackedScene" uid="uid://cxsr8hwsijrb1" path="res://assets/models/kitchen/fridge/fridge.tscn" id="1_vkry5"]
+[ext_resource type="Texture2D" uid="uid://crdd8dw4s36wh" path="res://assets/textures/2232100.jpg" id="2_5csku"]
 [ext_resource type="PackedScene" uid="uid://bmvcs4b4gqwqb" path="res://assets/models/kitchen/kitchen_sink/kitchen_sink.tscn" id="3_l61af"]
 [ext_resource type="PackedScene" uid="uid://bapju4x0sv2yl" path="res://assets/models/kitchen/gas_stove/gas_stove.tscn" id="4_3yei4"]
 [ext_resource type="PackedScene" uid="uid://1jixbevdbvsi" path="res://assets/models/kitchen/double_door_base_cabinet/double_door_base_cabinet.tscn" id="4_bd6lr"]
@@ -49,7 +51,14 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ijc0t"]
-albedo_color = Color(0.462745, 0.392157, 0.568627, 1)
+render_priority = 2
+albedo_color = Color(0.290196, 0.156863, 0.0784314, 1)
+albedo_texture = ExtResource("1_i5hyv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ciww"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elc2f"]
+albedo_texture = ExtResource("2_5csku")
 
 [node name="world" type="Node3D"]
 
@@ -66,8 +75,9 @@ environment = SubResource("Environment_nvpdp")
 [node name="struct" type="Node3D" parent="house"]
 
 [node name="floor" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(0.999951, 0.00989586, 0, -0.00989586, 0.999951, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
 use_collision = true
 size = Vector3(15, 1, 15)
 
@@ -79,101 +89,121 @@ size = Vector3(15, 1, 15)
 
 [node name="wall" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19013, 1.5, 7.2)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(6.61974, 3, 0.5)
 
 [node name="wall2" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.87039, 1.5, 7.2)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(7.25923, 3, 0.5)
 
 [node name="wall4" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 1.5, -7.2)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(15, 3, 0.5)
 
 [node name="wall3" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 7.25, 1.5, -0.0170986)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(10.3228, 3, 0.5)
 
 [node name="wall5" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, -7.25, 1.5, -0.0170986)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(10.3228, 3, 0.5)
 
 [node name="wall6" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, -1.78012, 1.5, 6.58115)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.547821, 3, 0.25)
 
 [node name="wall7" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-1.35, 0, -8.74228e-08, 0, 1, 0, 1.18021e-07, 0, -1, -6.19442, 1.5, 2.5202)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(1.2, 3, 0.25)
 
 [node name="wall8" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-1.35, 0, -8.74228e-08, 0, 1, 0, 1.18021e-07, 0, -1, 4.40309, 1.5, 2.6202)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(3.87037, 3, 0.25)
 
 [node name="wall9" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 1.16529, 1.5, 6.32638)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.954242, 3, 0.25)
 
 [node name="wall10" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1.35, 0, 1.42109e-14, 0, 1, 0, -3.19744e-14, 0, 1, 1.26532, 1.5, 5.55875)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.32966, 3, 0.25)
 
 [node name="wall11" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1.35, 0, 1.42109e-14, 0, 1, 0, -3.19744e-14, 0, 1, 2.63011, 1.5, 5.55875)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.185442, 3, 0.25)
 
 [node name="wall12" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 1.43057)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(1.57595, 3, 0.25)
 
 [node name="wall13" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 3.05402)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.460634, 3, 0.25)
 
 [node name="wall14" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 2.86529, 1.5, 5.74655)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(1.81325, 3, 0.25)
 
 [node name="wall15" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 0.26529, 1.5, -2.11415)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(7.20183, 3, 0.25)
 
 [node name="wall16" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1.35, 0, 1.42109e-14, 0, 1, 0, -3.19744e-14, 0, 1, 0.519051, 1.5, 2.62058)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.196032, 3, 0.253006)
 
 [node name="wall17" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, -0.567726, 1.5, -6.23705)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(1.07086, 3, 1.39819)
 
 [node name="wall18" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, -0.304903, 2.8674, 7.19782)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.363838, 0.265198, 1.15228)
 
 [node name="wall19" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-5.90104e-08, 0, 1, 0, 1, 0, -1.35, 0, -4.37114e-08, 1.22005, 2.8674, 2.62058)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.18522, 0.265198, 1.14059)
 
 [node name="wall20" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(-1.35, 0, -8.74228e-08, 0, 1, 0, 1.18021e-07, 0, -1, 2.86506, 2.8674, 3.94516)
+material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(0.18522, 0.265198, 1.15935)
 
@@ -230,7 +260,7 @@ transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819
 transform = Transform3D(-0.85, 0, 1.49012e-07, 0, 0.85, 0, -1.49012e-07, 0, -0.85, -3.84054, 1.35717, 6.69025)
 
 [node name="ceiling_lamp" parent="house/furniture/kitchen" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.266, 2.9, 4.374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.74243, 2.9, 4.61394)
 
 [node name="blender" parent="house/furniture/kitchen" instance=ExtResource("10_sgjjs")]
 transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -6.84886, 1.26503, 6.81662)
@@ -307,18 +337,18 @@ transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0.234125, 0, 7.00381
 [node name="bathroom" type="Node3D" parent="house/furniture"]
 
 [node name="ceiling_lamp" parent="house/furniture/bathroom" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77581, 2.9, 5.06393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77581, 2.9, 4.85669)
 
 [node name="bedroom" type="Node3D" parent="house/furniture"]
 
 [node name="ceiling_lamp" parent="house/furniture/bedroom" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64827, 2.9, -5.03706)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64827, 2.9, -4.09424)
 
 [node name="ceiling_lamp2" parent="house/furniture/bedroom" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0939, 2.9, -0.834816)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70423, 2.9, -0.0154412)
 
 [node name="ceiling_lamp3" parent="house/furniture/bedroom" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58285, 2.9, -0.834816)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58285, 2.9, 1.24517)
 
 [node name="drawers_base_cabinet" parent="house/furniture/bedroom" instance=ExtResource("16_7st5a")]
 transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, 6.53146, 0.422435, -5.20509)
@@ -328,6 +358,7 @@ transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, 
 
 [node name="bed" parent="house/furniture/bedroom" instance=ExtResource("17_5vqoy")]
 transform = Transform3D(-4.80825e-08, 0, -1.1, 0, 1.1, 0, 1.1, 0, -4.80825e-08, 5.25451, 0.746117, -3.3276)
+metadata/_edit_lock_ = true
 
 [node name="coffee_cup" parent="house/furniture/bedroom" instance=ExtResource("18_egb4a")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6.44239, 1.09577, -2.63465)
@@ -338,13 +369,13 @@ transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 6.54494, 1.36238, -5.23
 [node name="living_room" type="Node3D" parent="house/furniture"]
 
 [node name="ceiling_lamp" parent="house/furniture/living_room" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66034, 2.9, -3.96423)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4119, 2.87835, -4.34185)
 
 [node name="ceiling_lamp2" parent="house/furniture/living_room" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6585, 2.9, -0.244974)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.43478, 2.9, -0.244974)
 
 [node name="ceiling_lamp3" parent="house/furniture/living_room" instance=ExtResource("9_flrdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 2.9, 3.687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 2.9, 4.68352)
 
 [node name="wood_table" parent="house/furniture/living_room" instance=ExtResource("14_1pqtd")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.89288, 0.352371, -3.40413)

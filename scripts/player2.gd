@@ -22,7 +22,7 @@ var camera_x_axis = 0.0
 
 #bob variables
 const BOB_FREQ = 4
-const BOB_AMP = 0.08
+const BOB_AMP = 0.1
 var t_bob = 0.0
 
 #fov variables
@@ -66,8 +66,11 @@ func _process(delta):
 		velocity.y -= gravity * delta
 		
 	# Head bob
-	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera.transform.origin = _headbob(t_bob)
+	if (direction):
+		t_bob += delta * velocity.length() * float(is_on_floor())
+		camera.transform.origin = lerp(camera.transform.origin, _headbob(t_bob), delta * 8.0)
+	else:
+		camera.transform.origin = lerp(camera.transform.origin, Vector3(0, 0, 0), delta * 8.0)
 	
 	# FOV
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
