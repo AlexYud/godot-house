@@ -1,9 +1,17 @@
 extends CharacterBody3D
 
+# Movement constants
 const WALK_SPEED = 2.0
 const SPRINT_SPEED = 4.0
 const WALK_CAMERA_ACC = 2.0
 const SPRINT_CAMERA_ACC = 5.0
+
+# Crouch constants
+const CROUCH_SPEED = 1.0
+const CROUCH_HEIGHT = -0.5     
+const CROUCH_ACC = 8.0         
+const STAND_HEIGHT = 2.0
+const CROUCH_COLLIDER_HEIGHT = 1.2
 
 @export var playerSpeed = 2.0
 @export var playerAcceleration = 5.0
@@ -16,20 +24,26 @@ const SPRINT_CAMERA_ACC = 5.0
 @onready var camera = $Head/Camera3D
 @onready var hand = $Hand
 @onready var flashlight = $Hand/SpotLight3D
+@onready var collider = $CollisionShape3D  
 
 var direction = Vector3.ZERO
 var head_y_axis = 0.0
 var camera_x_axis = 0.0
 var isHudVisible = true
 
-#bob variables
+# Bob variables
 const BOB_FREQ = 4
 const BOB_AMP = 0.1
 var t_bob = 0.0
 
-#fov variables
+# FOV variables
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
+
+# Crouch state
+var is_crouching = false
+var crouch_offset = 0.0 
+var crouch_target = 0.0  
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -39,39 +53,67 @@ func _input(event):
 		head_y_axis += event.relative.x * cameraSensitivity
 		camera_x_axis += event.relative.y * cameraSensitivity
 		camera_x_axis = clamp(camera_x_axis, -35.0, 35.0)
+	
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
 		
 func _process(delta):
-	
-	direction = Input.get_axis("left", "right") * head.basis.x + Input.get_axis("up", "down") * head.basis.z
-	velocity = velocity.lerp(direction * playerSpeed + velocity.y * Vector3.UP, playerAcceleration * delta)
-	
-	head.rotation.y = lerp(head.rotation.y, -deg_to_rad(head_y_axis), cameraAcceleration * delta)
-	camera.rotation.x = lerp(camera.rotation.x, -deg_to_rad(camera_x_axis), cameraAcceleration * delta)
-	
-	hand.rotation.y = -deg_to_rad(head_y_axis)
-	flashlight.rotation.x = -deg_to_rad(camera_x_axis)
-		
 	if !isHudVisible:
-		# Handle Sprint.
-		if Input.is_action_pressed("sprint"):
+		# Movement input
+		direction = Input.get_axis("left", "right") * head.basis.x + Input.get_axis("up", "down") * head.basis.z
+
+		# Normalize to prevent diagonal speed boost
+		if direction.length() > 0:
+			direction = direction.normalized()
+
+		velocity = velocity.lerp(direction * playerSpeed + velocity.y * Vector3.UP, playerAcceleration * delta)
+
+		
+		# Camera rotation
+		head.rotation.y = lerp(head.rotation.y, -deg_to_rad(head_y_axis), cameraAcceleration * delta)
+		camera.rotation.x = lerp(camera.rotation.x, -deg_to_rad(camera_x_axis), cameraAcceleration * delta)
+		
+		hand.rotation.y = -deg_to_rad(head_y_axis)
+		flashlight.rotation.x = -deg_to_rad(camera_x_axis)
+		
+		# Handle Sprint
+		if Input.is_action_pressed("sprint") and !is_crouching:
 			playerSpeed = SPRINT_SPEED
 			cameraAcceleration = SPRINT_CAMERA_ACC
 		else:
 			playerSpeed = WALK_SPEED
 			cameraAcceleration = WALK_CAMERA_ACC
 		
-		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
+		# Handle Crouch
+		if Input.is_action_pressed("crouch"):
+			is_crouching = true
+			playerSpeed = CROUCH_SPEED
+			crouch_target = CROUCH_HEIGHT
+			if collider and collider.shape is CapsuleShape3D:
+				collider.shape.height = CROUCH_COLLIDER_HEIGHT
+		else:
+			is_crouching = false
+			crouch_target = 0.0
+			if collider and collider.shape is CapsuleShape3D:
+				collider.shape.height = STAND_HEIGHT
+		
+		# Smooth crouch transition
+		crouch_offset = lerp(crouch_offset, crouch_target, delta * CROUCH_ACC)
+		
+		# Handle Jump
+		if Input.is_action_just_pressed("jump") and is_on_floor() and !is_crouching:
 			velocity.y += jumpForce
 		else:
 			velocity.y -= gravity * delta
-			
-		# Head bob
-		if (direction):
+		
+		# --- CAMERA POSITION (CROUCH + BOB COMBINED) ---
+		var final_offset = Vector3(0, crouch_offset, 0)
+		if direction.length() > 0.01:
 			t_bob += delta * velocity.length() * float(is_on_floor())
-			camera.transform.origin = lerp(camera.transform.origin, _headbob(t_bob), delta * 8.0)
-		else:
-			camera.transform.origin = lerp(camera.transform.origin, Vector3(0, 0, 0), delta * 8.0)
+			final_offset += _headbob(t_bob)
+		
+		# Smoothly apply the combined offset
+		camera.transform.origin = lerp(camera.transform.origin, final_offset, delta * 10.0)
 		
 		# FOV
 		var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
@@ -79,7 +121,7 @@ func _process(delta):
 		camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 			
 		move_and_slide()
-
+		
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

@@ -21,8 +21,9 @@ func _process(delta):
 				if Input.is_action_just_pressed("interact"):
 					startInteraction(detected)
 	else:
-		if Input.is_key_pressed(KEY_ESCAPE):
+		if Input.is_action_just_pressed("interact"):
 			hud.visible = false
+
 
 func startInteraction(detected):
 	prompt.text = ""
