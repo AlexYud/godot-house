@@ -25,6 +25,7 @@ const CROUCH_COLLIDER_HEIGHT = 1.2
 @onready var hand = $Hand
 @onready var flashlight = $Hand/SpotLight3D
 @onready var collider = $CollisionShape3D  
+@onready var sfx_walk = $sfx_walk
 
 var direction = Vector3.ZERO
 var head_y_axis = 0.0
@@ -35,6 +36,7 @@ var isHudVisible = true
 const BOB_FREQ = 4
 const BOB_AMP = 0.1
 var t_bob = 0.0
+var last_step_phase = false   # track when to trigger footsteps
 
 # FOV variables
 const BASE_FOV = 75.0
@@ -68,7 +70,6 @@ func _process(delta):
 
 		velocity = velocity.lerp(direction * playerSpeed + velocity.y * Vector3.UP, playerAcceleration * delta)
 
-		
 		# Camera rotation
 		head.rotation.y = lerp(head.rotation.y, -deg_to_rad(head_y_axis), cameraAcceleration * delta)
 		camera.rotation.x = lerp(camera.rotation.x, -deg_to_rad(camera_x_axis), cameraAcceleration * delta)
@@ -108,9 +109,19 @@ func _process(delta):
 		
 		# --- CAMERA POSITION (CROUCH + BOB COMBINED) ---
 		var final_offset = Vector3(0, crouch_offset, 0)
-		if direction.length() > 0.01:
-			t_bob += delta * velocity.length() * float(is_on_floor())
+		if direction.length() > 0.01 and is_on_floor():
+			t_bob += delta * velocity.length()
 			final_offset += _headbob(t_bob)
+
+			# --- FOOTSTEP SOUND SYNC WITH BOB ---
+			var step_phase = sin(t_bob * BOB_FREQ) > 0.9
+			if step_phase and not last_step_phase:
+				sfx_walk.play()
+			last_step_phase = step_phase
+		else:
+			t_bob = 0.0
+			last_step_phase = false
+			sfx_walk.stop()
 		
 		# Smoothly apply the combined offset
 		camera.transform.origin = lerp(camera.transform.origin, final_offset, delta * 10.0)
@@ -121,7 +132,6 @@ func _process(delta):
 		camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 			
 		move_and_slide()
-		
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

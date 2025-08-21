@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://crad2awvmc12c"]
+[gd_scene load_steps=7 format=3 uid="uid://crad2awvmc12c"]
 
 [ext_resource type="Script" path="res://scripts/player2.gd" id="1_8qwge"]
 [ext_resource type="Script" path="res://scripts/interactRay.gd" id="2_4v8r5"]
 [ext_resource type="Texture2D" uid="uid://bom8x0ydeb6jr" path="res://assets/textures/cookie_light.jpg" id="2_ck06t"]
+[ext_resource type="AudioStream" uid="uid://cvbamuormry1c" path="res://assets/audios/walk.wav" id="4_lv7pw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmcb2"]
 
@@ -103,5 +104,8 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 1
 autowrap_mode = 2
+
+[node name="sfx_walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lv7pw")
 
 [connection signal="visibility_changed" from="CanvasLayer" to="." method="_on_canvas_layer_visibility_changed"]
