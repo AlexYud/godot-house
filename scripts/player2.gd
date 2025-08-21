@@ -43,10 +43,17 @@ const FOV_CHANGE = 1.5
 # Crouch state
 var is_crouching = false
 var crouch_offset = 0.0 
-var crouch_target = 0.0  
+var crouch_target = 0.0
+
+# Store original positions
+var original_camera_position = Vector3.ZERO
+var original_hand_position = Vector3.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Store original positions
+	original_camera_position = camera.transform.origin
+	original_hand_position = hand.transform.origin
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -84,21 +91,33 @@ func _process(delta):
 			playerSpeed = WALK_SPEED
 			cameraAcceleration = WALK_CAMERA_ACC
 		
-		# Handle Crouch
+		# Handle Crouch - only change the target
 		if Input.is_action_pressed("crouch"):
 			is_crouching = true
 			playerSpeed = CROUCH_SPEED
 			crouch_target = CROUCH_HEIGHT
-			if collider and collider.shape is CapsuleShape3D:
-				collider.shape.height = CROUCH_COLLIDER_HEIGHT
 		else:
 			is_crouching = false
 			crouch_target = 0.0
-			if collider and collider.shape is CapsuleShape3D:
-				collider.shape.height = STAND_HEIGHT
 		
 		# Smooth crouch transition
+		var previous_crouch_offset = crouch_offset
 		crouch_offset = lerp(crouch_offset, crouch_target, delta * CROUCH_ACC)
+		
+		# Smoothly interpolate collider height based on crouch progress
+		if collider and collider.shape is CapsuleShape3D:
+			# Calculate how far we are into the crouch (0 to 1)
+			var crouch_progress = 0.0
+			if crouch_target == CROUCH_HEIGHT: # Crouching down
+				crouch_progress = 1.0 - (crouch_offset - CROUCH_HEIGHT) / -CROUCH_HEIGHT
+			else: # Standing up
+				crouch_progress = crouch_offset / CROUCH_HEIGHT
+			
+			crouch_progress = clamp(crouch_progress, 0.0, 1.0)
+			
+			# Smoothly interpolate collider height
+			var target_collider_height = lerp(STAND_HEIGHT, CROUCH_COLLIDER_HEIGHT, crouch_progress)
+			collider.shape.height = lerp(collider.shape.height, target_collider_height, delta * CROUCH_ACC * 1.5)
 		
 		# Handle Jump
 		if Input.is_action_just_pressed("jump") and is_on_floor() and !is_crouching:
@@ -112,8 +131,9 @@ func _process(delta):
 			t_bob += delta * velocity.length() * float(is_on_floor())
 			final_offset += _headbob(t_bob)
 		
-		# Smoothly apply the combined offset
+		# Smoothly apply the combined offset to BOTH camera and hand
 		camera.transform.origin = lerp(camera.transform.origin, final_offset, delta * 10.0)
+		hand.transform.origin = lerp(hand.transform.origin, original_hand_position + final_offset, 10.0 * delta)
 		
 		# FOV
 		var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
