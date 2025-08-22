@@ -566,7 +566,7 @@ use_collision = true
 size = Vector3(1.95561, 2.52673, 0.5)
 
 [node name="wall28" type="CSGBox3D" parent="house2/struct"]
-transform = Transform3D(-2.22525e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -2.22525e-07, 69.3239, -2.74537, 2.21114)
+transform = Transform3D(-2.22525e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -2.22525e-07, 69.2618, -2.74537, 2.21114)
 material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(5.82007, 2.50951, 0.5)
@@ -644,10 +644,10 @@ use_collision = true
 size = Vector3(2.22036, 0.2948, 0.5)
 
 [node name="wall19" type="CSGBox3D" parent="house2/struct"]
-transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 2.3471, 7.70177)
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 2.3471, 7.69465)
 material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
-size = Vector3(1.68733, 0.2948, 0.5)
+size = Vector3(1.70158, 0.2948, 0.5)
 
 [node name="wall30" type="CSGBox3D" parent="house2/struct"]
 transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, -0.00805509, 12.8618)
