@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://crad2awvmc12c"]
+[gd_scene load_steps=9 format=3 uid="uid://crad2awvmc12c"]
 
 [ext_resource type="Script" path="res://scripts/player2.gd" id="1_8qwge"]
 [ext_resource type="Script" path="res://scripts/interactRay.gd" id="2_4v8r5"]
 [ext_resource type="Texture2D" uid="uid://bom8x0ydeb6jr" path="res://assets/textures/cookie_light.jpg" id="2_ck06t"]
-[ext_resource type="AudioStream" uid="uid://cvbamuormry1c" path="res://assets/audios/walk.wav" id="4_lv7pw"]
+[ext_resource type="AudioStream" uid="uid://d2b3x2ivfjoxg" path="res://assets/audios/walk.wav" id="4_qtlqn"]
+[ext_resource type="AudioStream" uid="uid://dmtofcjtbkk7d" path="res://assets/audios/walk_2.wav" id="5_4bn0h"]
+[ext_resource type="AudioStream" uid="uid://cbe8le3shdyin" path="res://assets/audios/crouch_walk.wav" id="5_f1qol"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmcb2"]
 
@@ -106,6 +108,18 @@ size_flags_vertical = 1
 autowrap_mode = 2
 
 [node name="sfx_walk" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_lv7pw")
+stream = ExtResource("4_qtlqn")
+
+[node name="sfx_walk_2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4bn0h")
+pitch_scale = 0.64
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sfx_walk_2"]
+transform = Transform3D(1, 0, 0, 0, 0.99941, -0.0343413, 0, 0.0343413, 0.99941, 2.03645, 1.08635, -6.64623)
+stream = ExtResource("5_f1qol")
+
+[node name="sfx_crouch_walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_f1qol")
+pitch_scale = 0.64
 
 [connection signal="visibility_changed" from="CanvasLayer" to="." method="_on_canvas_layer_visibility_changed"]
