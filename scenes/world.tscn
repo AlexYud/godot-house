@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://jysvrmbsf3eq"]
+[gd_scene load_steps=39 format=3 uid="uid://jysvrmbsf3eq"]
 
 [ext_resource type="Texture2D" uid="uid://clfoiahnjin27" path="res://assets/textures/Dark Wood Floor.jpeg" id="1_i5hyv"]
 [ext_resource type="PackedScene" uid="uid://cxsr8hwsijrb1" path="res://assets/models/kitchen/fridge/fridge.tscn" id="1_vkry5"]
@@ -61,6 +61,8 @@ albedo_texture = ExtResource("1_i5hyv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elc2f"]
 albedo_texture = ExtResource("2_5csku")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hn4ca"]
 
 [node name="world" type="Node3D"]
 
@@ -418,8 +420,14 @@ transform = Transform3D(-0.5809, 0, -0.291642, 0, 0.65, 0, 0.291642, 0, -0.5809,
 [node name="floor_lamp" parent="house/furniture/living_room" instance=ExtResource("22_pe0x3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.265659, 1.709, -0.819965)
 
+[node name="Area3D" type="Area3D" parent="house" groups=["audio_triggers"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37781, 0.566294, 4.15584)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="house/Area3D"]
+shape = SubResource("BoxShape3D_hn4ca")
+
 [node name="Player2" parent="." instance=ExtResource("28_fdhs0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02188, 5.96141)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02188, 5.18656)
 
 [node name="zombie" parent="." instance=ExtResource("30_x5k6l")]
 transform = Transform3D(-0.5, -4.37114e-08, 0, 4.37114e-08, -0.5, 0, 0, 0, 0.5, 1.971, 3.04622, 4.47257)
