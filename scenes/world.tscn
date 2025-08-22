@@ -42,11 +42,12 @@ sky_material = SubResource("ProceduralSkyMaterial_6ciya")
 [sub_resource type="Environment" id="Environment_nvpdp"]
 background_mode = 2
 sky = SubResource("Sky_xl21c")
-tonemap_mode = 2
+tonemap_mode = 3
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 glow_enabled = true
+fog_enabled = true
 fog_light_color = Color(1, 1, 1, 1)
 fog_density = 0.001
 volumetric_fog_enabled = true
@@ -68,7 +69,6 @@ albedo_texture = ExtResource("2_5csku")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 1.95483, 0)
-visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -79,7 +79,7 @@ environment = SubResource("Environment_nvpdp")
 [node name="struct" type="Node3D" parent="house"]
 
 [node name="floor" type="CSGBox3D" parent="house/struct"]
-transform = Transform3D(0.999951, 0.00989586, 0, -0.00989586, 0.999951, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_ijc0t")
 material_overlay = SubResource("StandardMaterial3D_3ciww")
 use_collision = true
@@ -87,6 +87,7 @@ size = Vector3(15, 1, 15)
 
 [node name="ceiling" type="CSGBox3D" parent="house/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 3.5, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_ijc0t")
 use_collision = true
 size = Vector3(15, 1, 15)
@@ -427,7 +428,256 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37781, 0.566294, 4.15584)
 shape = SubResource("BoxShape3D_hn4ca")
 
 [node name="Player2" parent="." instance=ExtResource("28_fdhs0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02188, 5.18656)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.0377, 1.02188, 14.2311)
 
 [node name="zombie" parent="." instance=ExtResource("30_x5k6l")]
 transform = Transform3D(-0.5, -4.37114e-08, 0, 4.37114e-08, -0.5, 0, 0, 0, 0.5, 1.971, 3.04622, 4.47257)
+
+[node name="house2" type="Node3D" parent="."]
+
+[node name="struct" type="Node3D" parent="house2"]
+
+[node name="door" parent="house2/struct" instance=ExtResource("15_6fd37")]
+transform = Transform3D(0.168232, 0, -0.627852, 0, 0.65, 0, 0.627852, 0, 0.168232, 55.6969, -0.492249, 9.69472)
+
+[node name="door2" parent="house2/struct" instance=ExtResource("15_6fd37")]
+transform = Transform3D(1.49012e-08, 0, -0.65, 0, 0.65, 0, 0.65, 0, 1.49012e-08, 60.8384, -0.5, 1.97971)
+
+[node name="door3" parent="house2/struct" instance=ExtResource("15_6fd37")]
+transform = Transform3D(-0.168232, 0, 0.627852, 0, 0.65, 0, -0.627852, 0, -0.168232, 59.7605, -0.5, 9.64132)
+
+[node name="door4" parent="house2/struct" instance=ExtResource("15_6fd37")]
+transform = Transform3D(-0.65, 0, -8.9407e-08, 0, 0.65, 0, 8.9407e-08, 0, -0.65, 66.9577, -0.5, 8.46206)
+
+[node name="floor" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.0622, -1, 8.91458)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(20.0108, 1, 14.6895)
+
+[node name="ceiling" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.6782, 2.93738, 7.78846)
+visible = false
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(15.0087, 1, 17.0119)
+
+[node name="floor5" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.1048, -1, 0.430525)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(1.93955, 1, 2.28663)
+
+[node name="floor6" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0, 1, 64.4296, 1.22754, 0.677232)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(6.81763, 1, 1.79322)
+
+[node name="floor2" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.1639, -1.00354, 0.619072)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(3.4895, 1.00708, 1.89857)
+
+[node name="floor3" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0, 1, 64.7435, -2.63763, 0.505138)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(7, 0.85791, 2.12633)
+
+[node name="floor4" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.7632, -4.25234, 2.55051)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(10.6403, 0.5, 6.52869)
+
+[node name="wall" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.3876, 1, 9.59424)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(2.41694, 3, 0.5)
+
+[node name="wall2" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.7108, 1, 9.6)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(4, 3, 0.5)
+
+[node name="wall3" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 58.6847, 0.993164, 3.12551)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(7.6687, 3.01367, 0.5)
+
+[node name="wall24" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 58.6847, -2.53174, 2.22286)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(5.85398, 2.91309, 0.5)
+
+[node name="wall13" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 66.8855, 1, 0.446299)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(2.30081, 3, 0.5)
+
+[node name="wall4" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.47035e-08, 0, -1, 0, 1, 0, 1, 0, -4.47035e-08, 52.4259, 1, 5.55102)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(7.88379, 3, 0.5)
+
+[node name="wall5" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 55.5575, 1, 1.82923)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(6.72906, 3, 0.5)
+
+[node name="wall6" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -1.78814e-07, 0, 1, 0, 1.78814e-07, 0, 0.999999, 64.0133, 1, 1.83806)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(6.28143, 3, 0.5)
+
+[node name="wall12" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -1.78814e-07, 0, 1, 0, 1.78814e-07, 0, 0.999999, 64.0216, 0.993271, 9.6)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(6.29782, 3.01346, 0.5)
+
+[node name="wall26" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -1.78814e-07, 0, 1, 0, 1.78814e-07, 0, 0.999999, 63.9875, -2.74923, 5.20688)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(10.1239, 2.50179, 1.22461)
+
+[node name="wall27" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -1.78814e-07, 0, 1, 0, 1.78814e-07, 0, 0.999999, 68.0998, -2.75398, -0.465047)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.95561, 2.52673, 0.5)
+
+[node name="wall28" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-2.22525e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -2.22525e-07, 69.3239, -2.74537, 2.21114)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(5.82007, 2.50951, 0.5)
+
+[node name="wall11" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -1.78814e-07, 0, 1, 0, 1.78814e-07, 0, 0.999999, 62.795, 1, 15.9944)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(8.72974, 3, 0.5)
+
+[node name="wall7" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -3.57627e-07, 0, 1, 0, 3.57627e-07, 0, 0.999999, 59.3109, 1, 1.83062)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(0.803162, 3, 0.5)
+
+[node name="wall8" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -3.57627e-07, 0, 1, 0, 3.57627e-07, 0, 0.999999, 62.7856, -0.761574, -0.465829)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(8.71564, 6.52315, 0.5)
+
+[node name="wall9" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 58.6819, 1, 12.3877)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(7.65208, 3, 0.5)
+
+[node name="wall10" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 1, 10.7996)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.92093, 3, 0.5)
+
+[node name="wall25" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 1, 14.8574)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.79443, 3, 0.5)
+
+[node name="wall14" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 1, 2.25982)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.2814, 3, 0.5)
+
+[node name="wall15" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 1, 8.95477)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(0.826245, 3, 0.5)
+
+[node name="wall16" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 1, 5.71662)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(2.25736, 3, 0.5)
+
+[node name="wall17" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 0.0437012, 3.74569)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.68733, 1.0874, 0.5)
+
+[node name="wall18" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 2.3471, 3.74569)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.68733, 0.2948, 0.5)
+
+[node name="wall29" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 2.3471, 12.8565)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(2.22036, 0.2948, 0.5)
+
+[node name="wall19" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, 2.3471, 7.70177)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.68733, 0.2948, 0.5)
+
+[node name="wall30" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 66.8992, -0.00805509, 12.8618)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(2.23158, 1, 0.5)
+
+[node name="wall20" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(-4.01339e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.01339e-07, 58.686, 2.35261, 7.76252)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.62459, 0.2948, 0.5)
+
+[node name="wall21" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -3.57627e-07, 0, 1, 0, 3.57627e-07, 0, 0.999999, 60.2902, 2.35006, 9.59956)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.17466, 0.2948, 0.5)
+
+[node name="wall23" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -3.57627e-07, 0, 1, 0, 3.57627e-07, 0, 0.999999, 60.2902, 2.35006, 1.83259)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.17466, 0.2948, 0.5)
+
+[node name="wall22" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.999999, 0, -3.57627e-07, 0, 1, 0, 3.57627e-07, 0, 0.999999, 55.1521, 2.3511, 9.59956)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(1.12498, 0.2948, 0.5)
+
+[node name="ceiling_lamp2" parent="house2/struct" instance=ExtResource("9_flrdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.8734, -1.53987, 2.10642)
