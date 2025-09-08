@@ -428,7 +428,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37781, 0.566294, 4.15584)
 shape = SubResource("BoxShape3D_hn4ca")
 
 [node name="Player2" parent="." instance=ExtResource("28_fdhs0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.0377, 1.02188, 14.2311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.1862, 1.02188, 13.871)
 
 [node name="zombie" parent="." instance=ExtResource("30_x5k6l")]
 transform = Transform3D(-0.5, -4.37114e-08, 0, 4.37114e-08, -0.5, 0, 0, 0, 0.5, 1.971, 3.04622, 4.47257)
@@ -458,7 +458,6 @@ size = Vector3(20.0108, 1, 14.6895)
 
 [node name="ceiling" type="CSGBox3D" parent="house2/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.6782, 2.93738, 7.78846)
-visible = false
 material_override = SubResource("StandardMaterial3D_ijc0t")
 material_overlay = SubResource("StandardMaterial3D_3ciww")
 use_collision = true
