@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://crad2awvmc12c"]
+[gd_scene load_steps=10 format=3 uid="uid://crad2awvmc12c"]
 
 [ext_resource type="Script" path="res://scripts/player2.gd" id="1_8qwge"]
 [ext_resource type="Script" path="res://scripts/interactRay.gd" id="2_4v8r5"]
 [ext_resource type="Texture2D" uid="uid://bom8x0ydeb6jr" path="res://assets/textures/cookie_light.jpg" id="2_ck06t"]
+[ext_resource type="Script" path="res://scenes/SpotLight3D.gd" id="4_nxtpx"]
 [ext_resource type="AudioStream" uid="uid://d2b3x2ivfjoxg" path="res://assets/audios/walk.wav" id="4_qtlqn"]
 [ext_resource type="AudioStream" uid="uid://dmtofcjtbkk7d" path="res://assets/audios/walk_2.wav" id="5_4bn0h"]
 [ext_resource type="AudioStream" uid="uid://cbe8le3shdyin" path="res://assets/audios/crouch_walk.wav" id="5_f1qol"]
@@ -70,16 +71,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972921, 0)
 [node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.282927, 0, 0)
 light_color = Color(0.980392, 0.901961, 0.72549, 1)
-light_energy = 3.484
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 7.635
+light_energy = 16.0
+light_volumetric_fog_energy = 16.0
 light_projector = ExtResource("2_ck06t")
-light_specular = 3.899
+light_size = 1.0
+light_specular = 16.0
 shadow_enabled = true
-spot_range = 20.0
+spot_range = 40.0
 spot_attenuation = 1.90734
-spot_angle = 20.0
-spot_angle_attenuation = 1.03526
+spot_angle = 25.0
+script = ExtResource("4_nxtpx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

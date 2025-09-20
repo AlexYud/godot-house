@@ -47,17 +47,24 @@ sky_material = SubResource("ProceduralSkyMaterial_6ciya")
 [sub_resource type="Environment" id="Environment_nvpdp"]
 background_mode = 2
 sky = SubResource("Sky_xl21c")
-tonemap_mode = 3
+tonemap_mode = 2
+tonemap_exposure = 0.5
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 glow_enabled = true
-fog_light_color = Color(1, 1, 1, 1)
-fog_light_energy = 0.33
+glow_intensity = 0.1
+glow_blend_mode = 0
+fog_enabled = true
+fog_light_color = Color(0.376471, 0.376471, 0.376471, 1)
+fog_light_energy = 0.3
 fog_density = 0.005
 fog_sky_affect = 0.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
+adjustment_enabled = true
+adjustment_contrast = 1.25
+adjustment_saturation = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ijc0t"]
 render_priority = 2
@@ -711,9 +718,10 @@ radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D"]
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 2.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
@@ -723,9 +731,10 @@ radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D4"]
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 2.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
@@ -735,9 +744,10 @@ radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D5"]
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 2.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
@@ -747,9 +757,10 @@ radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D6"]
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 2.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
@@ -759,33 +770,38 @@ radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D7"]
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 2.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
 [node name="CSGSphere3D8" type="CSGSphere3D" parent="house2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6337, 2.0257, 5.39783)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7471, 1.99408, 5.90939)
 radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20129, 0.231962, 0.0337143)
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 3.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
 [node name="CSGSphere3D2" type="CSGSphere3D" parent="house2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.2041, 2.0257, 18.2657)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.363, 2.83165, 12.6066)
 radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.351547, 0.0477662, 0)
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 3.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
 
@@ -795,8 +811,9 @@ radius = 0.168124
 
 [node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D3"]
 light_color = Color(1, 0.784314, 0.4, 1)
-light_energy = 0.677
-light_volumetric_fog_energy = 0.838
-light_specular = 3.247
+light_energy = 2.0
+light_size = 1.0
+light_specular = 16.0
+shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
