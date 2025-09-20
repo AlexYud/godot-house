@@ -33,8 +33,13 @@
 [ext_resource type="PackedScene" uid="uid://d0qr8p7tc5d3h" path="res://assets/models/monsters/zombie/zombie.tscn" id="30_x5k6l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6ciya"]
-sky_top_color = Color(0, 0, 0, 1)
-sky_horizon_color = Color(0.227451, 0.235294, 0.619608, 1)
+sky_top_color = Color(0, 0, 0.301961, 1)
+sky_horizon_color = Color(0.0117647, 0.0745098, 0.282353, 1)
+sky_energy_multiplier = 0.2
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+sun_angle_max = 0.0
+sun_curve = 0.172305
 
 [sub_resource type="Sky" id="Sky_xl21c"]
 sky_material = SubResource("ProceduralSkyMaterial_6ciya")
@@ -47,9 +52,10 @@ sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 glow_enabled = true
-fog_enabled = true
 fog_light_color = Color(1, 1, 1, 1)
-fog_density = 0.001
+fog_light_energy = 0.33
+fog_density = 0.005
+fog_sky_affect = 0.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 
@@ -67,14 +73,11 @@ albedo_texture = ExtResource("2_5csku")
 
 [node name="world" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 1.95483, 0)
-shadow_enabled = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nvpdp")
 
 [node name="house" type="Node3D" parent="."]
+visible = false
 
 [node name="struct" type="Node3D" parent="house"]
 
@@ -449,12 +452,27 @@ transform = Transform3D(-0.168232, 0, 0.627852, 0, 0.65, 0, -0.627852, 0, -0.168
 [node name="door4" parent="house2/struct" instance=ExtResource("15_6fd37")]
 transform = Transform3D(-0.65, 0, -8.9407e-08, 0, 0.65, 0, 8.9407e-08, 0, -0.65, 66.9577, -0.5, 8.46206)
 
-[node name="floor" type="CSGBox3D" parent="house2/struct"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.0622, -1, 8.91458)
+[node name="floor7" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.8924, -1.27966, 1.41926)
 material_override = SubResource("StandardMaterial3D_ijc0t")
 material_overlay = SubResource("StandardMaterial3D_3ciww")
 use_collision = true
-size = Vector3(20.0108, 1, 14.6895)
+size = Vector3(57.7737, 1, 63.5459)
+
+[node name="floor8" type="CSGBox3D" parent="house2/struct/floor7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59359, 0.156097, 6.05183)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+operation = 2
+use_collision = true
+size = Vector3(19.0093, 2.71539, 16.7107)
+
+[node name="floor" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.5568, -1, 8.91458)
+material_override = SubResource("StandardMaterial3D_ijc0t")
+material_overlay = SubResource("StandardMaterial3D_3ciww")
+use_collision = true
+size = Vector3(19.0215, 1, 14.6895)
 
 [node name="ceiling" type="CSGBox3D" parent="house2/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.6782, 2.93738, 7.78846)
@@ -527,6 +545,12 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 66.8855, 1, 0.446299)
 material_override = SubResource("StandardMaterial3D_elc2f")
 use_collision = true
 size = Vector3(2.30081, 3, 0.5)
+
+[node name="wall31" type="CSGBox3D" parent="house2/struct"]
+transform = Transform3D(0.00687658, 0, 0.999976, 0, 1, 0, -0.999976, 0, 0.00687658, 52.4135, 0.0679792, 12.2558)
+material_override = SubResource("StandardMaterial3D_elc2f")
+use_collision = true
+size = Vector3(4.7959, 1.23193, 0.5)
 
 [node name="wall4" type="CSGBox3D" parent="house2/struct"]
 transform = Transform3D(-4.47035e-08, 0, -1, 0, 1, 0, 1, 0, -4.47035e-08, 52.4259, 1, 5.55102)
@@ -680,3 +704,99 @@ size = Vector3(1.12498, 0.2948, 0.5)
 
 [node name="ceiling_lamp2" parent="house2/struct" instance=ExtResource("9_flrdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.8734, -1.53987, 2.10642)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1217, 2.0257, 14.5542)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1217, 2.0257, 8.4825)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D4"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1217, 2.0257, -1.90727)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D5"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.6334, 2.0257, -1.90727)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D6"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6337, 2.0257, -1.90727)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D7"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D8" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6337, 2.0257, 5.39783)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D8"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.2041, 2.0257, 18.2657)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D2"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="house2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.7006, 2.0257, 18.2657)
+radius = 0.168124
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house2/CSGSphere3D3"]
+light_color = Color(1, 0.784314, 0.4, 1)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.838
+light_specular = 3.247
+omni_range = 8.278
+omni_attenuation = 1.8025

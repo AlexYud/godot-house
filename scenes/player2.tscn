@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cbe8le3shdyin" path="res://assets/audios/crouch_walk.wav" id="5_f1qol"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmcb2"]
+height = 1.93676
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tm2b5"]
 
@@ -16,7 +17,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02188, 0)
 script = ExtResource("1_8qwge")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.00172341, 0)
 shape = SubResource("CapsuleShape3D_vmcb2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -68,13 +69,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972921, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.282927, 0, 0)
-light_energy = 3.0
+light_color = Color(0.980392, 0.901961, 0.72549, 1)
+light_energy = 3.484
 light_indirect_energy = 0.0
-light_volumetric_fog_energy = 16.0
+light_volumetric_fog_energy = 7.635
 light_projector = ExtResource("2_ck06t")
+light_specular = 3.899
 shadow_enabled = true
 spot_range = 20.0
+spot_attenuation = 1.90734
 spot_angle = 20.0
+spot_angle_attenuation = 1.03526
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

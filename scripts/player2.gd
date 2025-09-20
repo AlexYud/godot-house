@@ -90,12 +90,19 @@ func _process(delta):
 
 		velocity = velocity.lerp(direction * playerSpeed + velocity.y * Vector3.UP, playerAcceleration * delta)
 
-		# Camera rotation
-		head.rotation.y = lerp(head.rotation.y, -deg_to_rad(head_y_axis), cameraAcceleration * delta)
-		camera.rotation.x = lerp(camera.rotation.x, -deg_to_rad(camera_x_axis), cameraAcceleration * delta)
-		
-		hand.rotation.y = -deg_to_rad(head_y_axis)
-		flashlight.rotation.x = -deg_to_rad(camera_x_axis)
+		head.rotation.y = -deg_to_rad(head_y_axis)
+		camera.rotation.x = -deg_to_rad(camera_x_axis)
+
+		flashlight.rotation.x = lerp(
+			flashlight.rotation.x,
+			camera.rotation.x,
+			delta * 6.0   # adjust this value for speed (higher = snappier)
+		)
+		flashlight.rotation.y = lerp(
+			flashlight.rotation.y,
+			head.rotation.y,
+			delta * 6.0
+		)
 		
 		# Handle Sprint
 		if Input.is_action_pressed("sprint") and !is_crouching:
