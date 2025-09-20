@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://jysvrmbsf3eq"]
+[gd_scene load_steps=41 format=3 uid="uid://jysvrmbsf3eq"]
 
 [ext_resource type="Texture2D" uid="uid://clfoiahnjin27" path="res://assets/textures/Dark Wood Floor.jpeg" id="1_i5hyv"]
 [ext_resource type="PackedScene" uid="uid://cxsr8hwsijrb1" path="res://assets/models/kitchen/fridge/fridge.tscn" id="1_vkry5"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://37c8sunjcvia" path="res://assets/models/living_room/floor_lamp/floor_lamp.tscn" id="22_pe0x3"]
 [ext_resource type="PackedScene" uid="uid://crad2awvmc12c" path="res://scenes/player2.tscn" id="28_fdhs0"]
 [ext_resource type="PackedScene" uid="uid://d0qr8p7tc5d3h" path="res://assets/models/monsters/zombie/zombie.tscn" id="30_x5k6l"]
+[ext_resource type="Shader" path="res://shaders/grain.gdshader" id="32_7wa4c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6ciya"]
 sky_top_color = Color(0, 0, 0.301961, 1)
@@ -77,6 +78,11 @@ albedo_texture = ExtResource("1_i5hyv")
 albedo_texture = ExtResource("2_5csku")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hn4ca"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhuc8"]
+shader = ExtResource("32_7wa4c")
+shader_parameter/grain_intensity = 0.102
+shader_parameter/time_speed = 5.0
 
 [node name="world" type="Node3D"]
 
@@ -467,12 +473,12 @@ use_collision = true
 size = Vector3(57.7737, 1, 63.5459)
 
 [node name="floor8" type="CSGBox3D" parent="house2/struct/floor7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59359, 0.156097, 6.05183)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79823, 0.156097, 6.1553)
 material_override = SubResource("StandardMaterial3D_ijc0t")
 material_overlay = SubResource("StandardMaterial3D_3ciww")
 operation = 2
 use_collision = true
-size = Vector3(19.0093, 2.71539, 16.7107)
+size = Vector3(10.2256, 2.71539, 16.5038)
 
 [node name="floor" type="CSGBox3D" parent="house2/struct"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.5568, -1, 8.91458)
@@ -817,3 +823,10 @@ light_specular = 16.0
 shadow_enabled = true
 omni_range = 8.278
 omni_attenuation = 1.8025
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_bhuc8")
+offset_right = 1921.0
+offset_bottom = 1077.0
